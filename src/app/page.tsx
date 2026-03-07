@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 
@@ -9,15 +10,11 @@ export default function Home() {
       <Show when="signed-out">
 
         <SignInButton mode="modal">
-          <button className="bg-blue-500 m-2 p-2">
-            Sign In
-          </button>
+          <Button>Sign In</Button>
         </SignInButton>
 
         <SignUpButton mode="modal">
-          <button className="bg-blue-500 m-2 p-2">
-            Sign Up
-          </button>
+          <Button variant={"secondary"}>Sign Up</Button>
         </SignUpButton>
 
       </Show>
