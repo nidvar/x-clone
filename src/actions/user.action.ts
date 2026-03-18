@@ -54,3 +54,15 @@ export async function getUserByClerkId(clerkId: string){
     },
   });
 }
+
+export async function getDbUserId(){
+  const data = await auth();
+
+  if(!data?.userId){
+    return data.userId;
+  };
+
+  const user = await getUserByClerkId(data.userId);
+
+  return user?.clerkId;
+};
