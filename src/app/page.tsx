@@ -1,26 +1,22 @@
+import CreatePost from "@/components/CreatePost";
 import { Button } from "@/components/ui/button";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  const user = await currentUser();
+
   return (
-    <div>
-      <h1>Hello Home Page with latest nextjs</h1>
+    <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+      <div className="lg:col-span-6">
+        {user? <CreatePost />: null}
+      </div>
 
-      <Show when="signed-out">
-
-        <SignInButton mode="modal">
-          <Button>Sign In</Button>
-        </SignInButton>
-
-        <SignUpButton mode="modal">
-          <Button variant={"secondary"}>Sign Up</Button>
-        </SignUpButton>
-
-      </Show>
-      <Show when="signed-in">
-        <UserButton />
-      </Show>
+      <div className="hidden lg:block lg:col-span-4 sticky top-20">
+        Who to follow
+      </div>
 
     </div>
   );

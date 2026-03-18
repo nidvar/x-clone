@@ -56,13 +56,12 @@ export async function getUserByClerkId(clerkId: string){
 }
 
 export async function getDbUserId(){
-  const data = await auth();
+  const { userId: clerkId } = await auth();
+  if (!clerkId) return null;
 
-  if(!data?.userId){
-    return data.userId;
-  };
+  const user = await getUserByClerkId(clerkId);
 
-  const user = await getUserByClerkId(data.userId);
+  if (!user) throw new Error("User not found");
 
-  return user?.clerkId;
+  return user.id;
 };
